@@ -1,3 +1,11 @@
+// TODO: 
+// * Will need a long list of handlebar -> JS variable bindings
+// * Then, a bunch of page conditional logic like below which pushes different dataLayer content
+
+
+
+
+
 // Initialization
 dataLayer = [];
 
