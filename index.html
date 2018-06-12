@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+// TODO: 
+// * Then, a bunch of page conditional logic like below which pushes different dataLayer content
+
+// Initialization, only needed if placed before the GTM snippet
+dataLayer = [];
+
+/**
+ * List of handlebar variables available in Big Cartel; NOTE: many of these are functions that require parameters and should be omitted or just left as a comment for parity
+ * 
+ * Cart: cart.item_count, cart.subtotal, cart.total, cart.items
+ * Cart Item: item.id, item.name, item.price (qty*unit_price), item.unit_price, item.shipping, item.total, item.quantity, item.product, item.option
+ * Category: see https://developers.bigcartel.com/api/themes#category
+ * Contact: see https://developers.bigcartel.com/api/themes#contact
+ * Country: see https://developers.bigcartel.com/api/themes#country
+ * Image: see https://developers.bigcartel.com/api/themes#image
+ */
+
+
+/*
+ * Page: see https://developers.bigcartel.com/api/themes#page
+ */
+dataLayer.push({
+    "page.id": "{{ page.id }}",
+    "page.name": "{{ page.name }}",
+    // "page.content": "", // NOTE: can cause infinite recursion
+    "page.category": "{{ page.category }}",
+    "page.permalink": "{{ page.permalink }}",
+    "page.url": "{{ page.url }}",
+    "page.full_url": "{{ page.full_url }}",
+    "page.full_path": "{{ page.full_path }}"
+});
+
+// NOTE: These aren't really useful without further manipulation
+// dataLayer.push({
+//     "pages.all": "{{ pages.all }}",
+//     "pages.permalink": "{{ pages.permalink }}"
+// });
+
+/*
+ * Product: See https://developers.bigcartel.com/api/themes#product
+ * NOTE: Many of these aren't really useful without further manipulation
+ */
+
+ {% if page.permalink == 'product' %}
+ <script>
+    dataLayer.push({
+        "product.id": "{{ product.id }}",
+        "product.name": "{{ product.name }}",
+        "product.permalink": "{{ product.permalink }}",
+        "product.url": "{{ product.url }}",
+        "product.edit_url": "{{ product.edit_url }}",
+        "product.position": "{{ product.position }}",
+        // "product.description": "", // NOTE: HTML entities don't get escaped properly, 
+        "product.status": "{{ product.status }}",
+        "product.created_at": "{{ product.created_at }}",
+        "product.categories": "{{ product.categories }}",
+        "product.css_class": "{{ product.css_class }}",
+        "product.default_price": "{{ product.default_price }}",
+        "product.variable_pricing": "{{ product.variable_pricing }}",
+        "product.min_price": "{{ product.min_price }}",
+        "product.max_price": "{{ product.max_price }}",
+        "product.on_sale": "{{ product.on_sale }}",
+        "product.has_default_option": "{{ product.has_default_option }}",
+        "product.option": "{{ product.option }}",
+        "product.options": "{{ product.options }}",
+        "product.options_in_stock": "{{ product.options_in_stock }}",
+        "product.shipping": "{{ product.shipping }}",
+        "product.image": "{{ product.image }}",
+        "product.images": "{{ product.images }}",
+        "product.image_count": "{{ product.image_count }}",
+        "product.previous_product": "{{ product.previous_product }}",
+        "product.next_product": "{{ product.next_product }}"
+    });
+
+     dataLayer.push({
+         "products.all": "{{ products.all }}",
+         "products.current": "{{ products.current }}",
+         "products.on_sale": "{{ products.on_sale }}",
+         "products.permalink": "{{ products.permalink }}"
+     });
+</script>
+ {% endif %}
+
+ /*
+ * Product Option: option.id, option.name, option.price, option.has_custom_price, option.position, option.sold, option.sold_out, option.quantity, option.inventory, option.default
+ * Product Shipping Area: see https://developers.bigcartel.com/api/themes#product-shipping-area
+ * Store: store.name, store.description, store.url, store.website, store.currency.name, store.currency.code, store.currency.sign, store.country
+ */
+
+</script>
+</head>
+<body>
+</body>
+</html>
